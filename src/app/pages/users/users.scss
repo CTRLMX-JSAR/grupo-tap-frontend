@@ -1,0 +1,31 @@
+.table-controls {
+  display: flex;
+  justify-content: space-between; /* Empuja los elementos a los extremos */
+  align-items: center; /* Los alinea verticalmente */
+  margin-bottom: 1rem; /* Añade un espacio debajo */
+}
+
+.filter-field {
+  width: 300px; /* Define un ancho para el campo de filtro */
+}
+.users-page {
+  padding: 20px;
+  background-color: #f5f5f5; /* Fondo claro para la página de usuarios */
+}
+.users-page h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+.users-page p {
+  font-size: 1rem;
+  color: #666; /* Color gris para el texto descriptivo */
+}
+.mat-form-field {
+  width: 100%; /* Asegura que el campo ocupe todo el ancho disponible */
+}
+.mat-elevation-z8 {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil para la tabla */
+}
+.mat-table {
+  width: 100%; /* Asegura que la tabla ocupe todo el ancho disponible */
+}

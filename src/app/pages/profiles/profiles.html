@@ -1,0 +1,67 @@
+<div class="users-page">
+    <h1>Perfiles</h1>
+    <p>Gestión de perfiles del sistema.</p>
+    <p>Desde aquí puedes crear, editar, eliminar y consultar los perfiles registrados.</p>
+</div>
+<div class="table-controls">
+    <div class="d-flex gap-2">
+        <button mat-stroked-button  (click)="openCreateModal()">
+            <mat-icon>add</mat-icon>
+            Nuevo Perfil
+        </button>
+        <button mat-stroked-button (click)="exportToExcel()">
+            <mat-icon>grid_on</mat-icon>
+            Exportar a Excel
+        </button>
+        <button mat-stroked-button (click)="exportToPdf()">
+            <mat-icon>picture_as_pdf</mat-icon>
+            Exportar a PDF
+        </button>
+    </div>
+
+    <mat-form-field appearance="outline" class="filter-field">
+        <mat-label>Filtrar perfiles...</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ej. Administrador" #input>
+    </mat-form-field>
+</div>
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="profile_code">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Código </th>
+            <td mat-cell *matCellDef="let row"> {{row._id}} </td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+            <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="created_at">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Creación </th>
+            <td mat-cell *matCellDef="let row"> {{row.created_at | date:'dd/MM/yyyy HH:mm'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Acciones </th>
+            <td mat-cell *matCellDef="let row">
+                <button mat-icon-button color="accent" title="Detalles" (click)="openDetailModal(row)">
+                    <mat-icon>visibility</mat-icon>
+                </button>
+                <button mat-icon-button color="primary" title="Editar" (click)="openEditModal(row)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" title="Eliminar" (click)="deleteProfile(row)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+                <span *ngIf="!input.value">No existen registros para mostrar.</span>
+                <span *ngIf="input.value">No hay datos que coincidan con el filtro "{{input.value}}"</span>
+            </td>
+        </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
